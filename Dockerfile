@@ -8,7 +8,7 @@ FROM node:20-alpine AS final
 WORKDIR /app
 COPY --from=builder ./app/dist ./dist
 COPY package.json .
-COPY .env .
+# COPY .env .
 COPY yarn.lock .
 RUN yarn install --production
 VOLUME ["/data"]
