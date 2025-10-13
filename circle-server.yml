@@ -1,25 +1,37 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: circle-server-pod
+  name: circle-server-deployment
+  labels:
+    app: circle-server
 spec:
-  containers:
-  - name: circle-server-pod
-    image: virendrapatidar/circle-node:latest
-    ports:
-    - containerPort: 80
-    env:
-    - name: API_KEY
-      value: "TEST_API_KEY:7c187e809486e9c501db53cd5e8aaf60:53f217c580d4ba73d64a2abb7ac69184"
-    - name: PORT
-      value: "8080"
-    - name: DATABASE_FILENAME
-      value: "/data/sqlite.db"      
-    volumeMounts:
-    - name: server-data-volume
-      mountPath: /data
-  volumes:
-  - name: server-data-volume
-    hostPath:
-      path: "/tmp"
-      type: DirectoryOrCreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: circle-server
+  template:
+    metadata:
+      labels:
+        app: circle-server
+    spec:
+      containers:
+      - name: circle-server
+        image: virendrapatidar/circle-node:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: API_KEY
+          value: "TEST_API_KEY:7c187e809486e9c501db53cd5e8aaf60:53f217c580d4ba73d64a2abb7ac69184"
+        - name: PORT
+          value: "8080"
+        - name: DATABASE_FILENAME
+          value: "/data/sqlite.db"
+        volumeMounts:
+        - name: server-data-volume
+          mountPath: /data
+      volumes:
+      - name: server-data-volume
+        hostPath:
+          path: "/tmp"
+          type: DirectoryOrCreate
