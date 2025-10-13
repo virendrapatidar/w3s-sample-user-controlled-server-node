@@ -9,6 +9,7 @@
     "test:coverage": "jest --coverage",
     "dev": "tsx watch src/index.ts",
     "start": "npx ts-node src/index.ts",
+    "build": "tsc -p .",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
