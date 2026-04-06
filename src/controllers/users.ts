@@ -58,7 +58,7 @@ export const initializeUser = async (
   try {
     const response = await circleUserSdk.createUserPinWithWallets({
       userId: req.body.userId,
-      blockchains: req.body?.blockchains ?? ['MATIC-AMOY'],
+      blockchains: req.body?.blockchains ?? ['ARC-TESTNET'],
       accountType: req.body?.accountType
     });
     res.status(200).send(response.data);

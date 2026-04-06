@@ -41,7 +41,7 @@ export const signUpCallback = (req: Request, res: Response) =>
       });
       const challengeResponse = await circleUserSdk.createUserPinWithWallets({
         userId: newUserId,
-        blockchains: ['MATIC-AMOY'],
+        blockchains: ['ARC-TESTNET'],
         accountType: 'SCA'
       });
       // insert User into DB
@@ -103,7 +103,7 @@ export const signInCallback = (req: Request, res: Response) =>
         // when user has not enabled their PIN or security questions yet
         challengeResponse = await circleUserSdk.createUserPinWithWallets({
           userId: user.userId,
-          blockchains: ['MATIC-AMOY'],
+          blockchains: ['ARC-TESTNET'],
           accountType: 'SCA'
         });
       }
